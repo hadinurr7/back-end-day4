@@ -1,18 +1,16 @@
 import { db } from "../../config/db";
-import { DataExpense } from "../../types";
+import { Expense } from "../../types/expense";
 
 export const getExpenseService = async (id: number) => {
   try {
-    const query = "select * from expenses;"; // ini
-    const result: DataExpense = await db.query(query); // ini
+    const query = `select  * from expenses where id = ${id};`;
+    const { rows } = await db.query<Expense>(query);
 
-    const expense = result.expenses.find((expense) => expense.id === id);
-
-    if (!expense) {
+    if (!rows.length) {
       throw new Error("expense not found");
     }
 
-    return expense;
+    return rows;
   } catch (error) {
     throw error;
   }

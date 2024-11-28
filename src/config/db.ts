@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool,types } from "pg";
 import {
   SUPABASE_DATABASE,
   SUPABASE_HOST,
@@ -14,3 +14,5 @@ export const db = new Pool({
   database: SUPABASE_DATABASE,
   port: Number(SUPABASE_PORT),
 });
+
+types.setTypeParser(20,(val)=> parseInt(val))

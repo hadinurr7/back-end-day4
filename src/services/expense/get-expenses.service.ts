@@ -2,11 +2,10 @@ import { db } from "../../config/db";
 
 export const getExpensesService = async () => {
   try {
-    const query = "select * from expenses;"; // ini
+    const query = "select * from expenses;";
+    const result = await db.query(query);
 
-    const result = await db.query(query); // ini
-
-    return result.rows; //ini 
+    return result.rows; 
     
   } catch (error) {
     throw error;
